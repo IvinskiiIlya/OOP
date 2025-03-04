@@ -1,0 +1,14 @@
+D:\HEI\6 семестр\ООП\ЛР 1\Discipline Management System\Discipline Management System\obj\Debug\net8.0\Discipline Management System.GeneratedMSBuildEditorConfig.editorconfig
+D:\HEI\6 семестр\ООП\ЛР 1\Discipline Management System\Discipline Management System\obj\Debug\net8.0\Discipline Management System.AssemblyInfoInputs.cache
+D:\HEI\6 семестр\ООП\ЛР 1\Discipline Management System\Discipline Management System\obj\Debug\net8.0\Discipline Management System.AssemblyInfo.cs
+D:\HEI\6 семестр\ООП\ЛР 1\Discipline Management System\Discipline Management System\obj\Debug\net8.0\Discipline Management System.csproj.CoreCompileInputs.cache
+D:\HEI\6 семестр\ООП\ЛР 1\Discipline Management System\Discipline Management System\bin\Debug\net8.0\Discipline Management System.exe
+D:\HEI\6 семестр\ООП\ЛР 1\Discipline Management System\Discipline Management System\bin\Debug\net8.0\Discipline Management System.deps.json
+D:\HEI\6 семестр\ООП\ЛР 1\Discipline Management System\Discipline Management System\bin\Debug\net8.0\Discipline Management System.runtimeconfig.json
+D:\HEI\6 семестр\ООП\ЛР 1\Discipline Management System\Discipline Management System\bin\Debug\net8.0\Discipline Management System.dll
+D:\HEI\6 семестр\ООП\ЛР 1\Discipline Management System\Discipline Management System\bin\Debug\net8.0\Discipline Management System.pdb
+D:\HEI\6 семестр\ООП\ЛР 1\Discipline Management System\Discipline Management System\obj\Debug\net8.0\Discipline Management System.dll
+D:\HEI\6 семестр\ООП\ЛР 1\Discipline Management System\Discipline Management System\obj\Debug\net8.0\refint\Discipline Management System.dll
+D:\HEI\6 семестр\ООП\ЛР 1\Discipline Management System\Discipline Management System\obj\Debug\net8.0\Discipline Management System.pdb
+D:\HEI\6 семестр\ООП\ЛР 1\Discipline Management System\Discipline Management System\obj\Debug\net8.0\Discipline Management System.genruntimeconfig.cache
+D:\HEI\6 семестр\ООП\ЛР 1\Discipline Management System\Discipline Management System\obj\Debug\net8.0\ref\Discipline Management System.dll
