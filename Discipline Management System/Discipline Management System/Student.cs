@@ -28,6 +28,7 @@ public class Student : Person
         Surname = surname;
         Name = name;
         Patronymic = patronymic;
+        Age = Age;
         GroupNumber = groupNumber;
         Course = course;
     }
@@ -38,6 +39,6 @@ public class Student : Person
         Console.WriteLine($"ФИО: {Surname} {Name} {Patronymic}, возраст: {Age}");
         Console.WriteLine($"Курс обучения: {Course}");
         Console.WriteLine($"Группа студента: {GroupNumber}");
-        Console.WriteLine();
+        Console.WriteLine(new string('-', 50));
     }
 }

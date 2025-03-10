@@ -20,13 +20,14 @@ public class Lecturer : Person
         return lecturer;
     }
 
-    public void UpdateLecturer(string surname, string name, string patronymic, string academicTitle, List<string> subjects)
+    public static void UpdateLecturer(int id, string surname, string name, string patronymic, int age, string academicTitle, List<string> subjects)
     {
-        Surname = surname;
-        Name = name;
-        Patronymic = patronymic;
-        AcademicTitle = academicTitle;
-        Subjects = subjects;
+        Global.Lecturers[id].Surname = surname;
+        Global.Lecturers[id].Name = name;
+        Global.Lecturers[id].Patronymic = patronymic;
+        Global.Lecturers[id].Age = age;
+        Global.Lecturers[id].AcademicTitle = academicTitle;
+        Global.Lecturers[id].Subjects = subjects ;
     }
 
     public void DisplayInfo()
@@ -35,6 +36,6 @@ public class Lecturer : Person
         Console.WriteLine($"ФИО: {Surname} {Name} {Patronymic}, возраст: {Age}");
         Console.WriteLine($"Ученое звание: {AcademicTitle}");
         Console.WriteLine($"Преподаваемые дисциплины: {string.Join(", ", Subjects)}");
-        Console.WriteLine();
+        Console.WriteLine(new string('-', 50));
     }
 }
