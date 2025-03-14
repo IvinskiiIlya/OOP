@@ -23,14 +23,14 @@ public class Student : Person
         return student;
     }
     
-    public void UpdateStudent(string surname, string name, string patronymic, int groupNumber, int course)
+    public static void UpdateStudent(int id, string surname, string name, string patronymic, int age, int groupNumber, int course)
     {
-        Surname = surname;
-        Name = name;
-        Patronymic = patronymic;
-        Age = Age;
-        GroupNumber = groupNumber;
-        Course = course;
+        Global.Students[id].Surname = surname;
+        Global.Students[id].Name = name;
+        Global.Students[id].Patronymic = patronymic;
+        Global.Students[id].Age = age;
+        Global.Students[id].GroupNumber = groupNumber;
+        Global.Students[id].Course = course;
     }
     
     public void DisplayInfo()

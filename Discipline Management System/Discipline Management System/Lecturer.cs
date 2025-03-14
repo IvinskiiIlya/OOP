@@ -27,7 +27,7 @@ public class Lecturer : Person
         Global.Lecturers[id].Patronymic = patronymic;
         Global.Lecturers[id].Age = age;
         Global.Lecturers[id].AcademicTitle = academicTitle;
-        Global.Lecturers[id].Subjects = subjects ;
+        Global.Lecturers[id].Subjects = subjects;
     }
 
     public void DisplayInfo()

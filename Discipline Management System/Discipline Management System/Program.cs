@@ -42,18 +42,6 @@ public class Program
             Student student = Student.AddStudent(id, surnames[numOfObjects-i-1], names[numOfObjects-i-1], patronymics[numOfObjects-i-1], studentAge, group, course);
             Global.Students.Add(student);
         }
-        /*foreach (var discipline in Global.Disciplines)
-        {
-            discipline.DisplayInfo();
-        }
-        foreach (var lecturer in Global.Lecturers)
-        {
-            lecturer.DisplayInfo();
-        }
-        foreach (var student in Global.Students)
-        {
-            student.DisplayInfo();
-        }*/
         
         while (true)
         {
@@ -73,10 +61,72 @@ public class Program
                             switch (studentSelection)
                             {
                                 case 1:
+                                    int addId = Global.Students.Count + 1;
+                                    Console.WriteLine("Введите фамилию:");
+                                    string studentsSurnameAdding = Console.ReadLine();
+                                    Console.WriteLine("Введите имя:");
+                                    string studentsNameAdding = Console.ReadLine();
+                                    Console.WriteLine("Введите отчество:");
+                                    string studentsPatronymicAdding = Console.ReadLine();
+                                    Console.WriteLine("Введите возраст:");
+                                    bool isStudentsAge = int.TryParse(Console.ReadLine(), out int age);
+                                    Console.WriteLine("Введите группу студента:");
+                                    bool isStudentsGroup = int.TryParse(Console.ReadLine(), out int group);
+                                    Console.WriteLine("Введите курс обучения студента:");
+                                    bool isStudentsCourse = int.TryParse(Console.ReadLine(), out int course);
+                                    Student studentsAdding = Student.AddStudent(addId, studentsSurnameAdding, studentsNameAdding, studentsPatronymicAdding, age, group, course);
+                                    Global.Students.Add(studentsAdding);
+                                    Console.WriteLine("Студент добавлен");
                                     break;
                                 case 2:
+                                    foreach (var student in Global.Students)
+                                    {
+                                        student.DisplayInfo();
+                                    }
+                                    Console.WriteLine("Введите ID студента, информацию о котором хотите изменить:");
+                                    bool isStudentsIdChanging = int.TryParse(Console.ReadLine(), out int changeId);
+                                    if (isStudentsIdChanging == true && changeId > 0 && changeId < Global.Lecturers.Count + 1)
+                                    {
+                                        Console.WriteLine("Введите фамилию:");
+                                        string studentsSurnameChanging = Console.ReadLine();
+                                        Console.WriteLine("Введите имя:");
+                                        string studentsNameChanging = Console.ReadLine();
+                                        Console.WriteLine("Введите отчество:");
+                                        string studentsPatronymicChanging = Console.ReadLine();
+                                        Console.WriteLine("Введите возраст:");
+                                        bool isStudentsAgeChanging = int.TryParse(Console.ReadLine(), out int changeAge);
+                                        Console.WriteLine("Введите группу студента:");
+                                        bool isStudentsGroupChanging = int.TryParse(Console.ReadLine(), out int changeGroup);
+                                        Console.WriteLine("Введите курс обучения студента:");
+                                        bool isStudentsCourseChanging = int.TryParse(Console.ReadLine(), out int changeCourse);
+                                        Student.UpdateStudent(changeId - 1, studentsSurnameChanging, studentsNameChanging, studentsPatronymicChanging, changeAge, changeGroup, changeCourse);
+                                        Console.WriteLine($"Данные о студенте с ID = {changeId} изменены");
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Введен несуществующий ID");
+                                    }
                                     break;
                                 case 3:
+                                    foreach (var student in Global.Students)
+                                    {
+                                        student.DisplayInfo();
+                                    }
+                                    Console.WriteLine("Введите ID студента, которого хотите удалить:");
+                                    bool isStudentsIdDeleting = int.TryParse(Console.ReadLine(), out int deleteId);
+                                    if (isStudentsIdDeleting == true && deleteId > 0 && deleteId < Global.Students.Count + 1)
+                                    {
+                                        Global.Students.RemoveAt(deleteId - 1);
+                                        for (int i = 0; i < Global.Students.Count; i++)
+                                        {
+                                            Global.Students[i].Id = i + 1;
+                                        };
+                                        Console.WriteLine($"Студент с ID = {deleteId} удален");
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Введен несуществующий ID");
+                                    }
                                     break;
                                 case 4:
                                     foreach (var student in Global.Students)
@@ -96,25 +146,24 @@ public class Program
                             switch (lecturerSelection)
                             {
                                 case 1:
+                                    int addId = Global.Lecturers.Count + 1;
+                                    Console.WriteLine("Введите фамилию:");
+                                    string lecturersSurnameAdding = Console.ReadLine();
+                                    Console.WriteLine("Введите имя:");
+                                    string lecturersNameAdding = Console.ReadLine();
+                                    Console.WriteLine("Введите отчество:");
+                                    string lecturersPatronymicAdding = Console.ReadLine();
+                                    Console.WriteLine("Введите возраст:");
+                                    bool isLecturersAge = int.TryParse(Console.ReadLine(), out int age);
+                                    Console.WriteLine("Введите ученое звание:");
+                                    string lecturersAcademicTitleAdding = Console.ReadLine();
                                     Console.WriteLine("Введите первую преподаваемую дисциплину:");
                                     string firstDiscipline = Console.ReadLine();
                                     Console.WriteLine("Введите вторую дисциплину:");
                                     string secondDiscipline = Console.ReadLine();
                                     var subjectsAdding = new List<string> { firstDiscipline, secondDiscipline };
-                                    Console.WriteLine("Введите ID:");
-                                    bool isLecturerAddId = int.TryParse(Console.ReadLine(), out int addId);
-                                    Console.WriteLine("Введите фамилию:");
-                                    string lecturerSurnameAdding = Console.ReadLine();
-                                    Console.WriteLine("Введите имя:");
-                                    string lecturerNameAdding = Console.ReadLine();
-                                    Console.WriteLine("Введите отчество:");
-                                    string lecturerPatronymicAdding = Console.ReadLine();
-                                    Console.WriteLine("Введите возраст:");
-                                    bool isLecturerAge = int.TryParse(Console.ReadLine(), out int age);
-                                    Console.WriteLine("Введите ученое звание:");
-                                    string lecturerAcademicTitleAdding = Console.ReadLine();
-                                    Lecturer lecturerAdding = Lecturer.AddLecturer(addId, lecturerSurnameAdding, lecturerNameAdding, lecturerPatronymicAdding, age, lecturerAcademicTitleAdding, subjectsAdding);
-                                    Global.Lecturers.Add(lecturerAdding);
+                                    Lecturer lecturersAdding = Lecturer.AddLecturer(addId, lecturersSurnameAdding, lecturersNameAdding, lecturersPatronymicAdding, age, lecturersAcademicTitleAdding, subjectsAdding);
+                                    Global.Lecturers.Add(lecturersAdding);
                                     Console.WriteLine("Преподаватель добавлен");
                                     break;
                                 case 2:
@@ -123,25 +172,25 @@ public class Program
                                         lecturer.DisplayInfo();
                                     }
                                     Console.WriteLine("Введите ID преподавателя, информацию о котором хотите изменить:");
-                                    bool isLecturerChangeId = int.TryParse(Console.ReadLine(), out int changeId);
-                                    if (isLecturerChangeId == true && changeId > 0 && changeId < Global.Lecturers.Count + 1)
+                                    bool isLecturersIdChanging = int.TryParse(Console.ReadLine(), out int changeId);
+                                    if (isLecturersIdChanging == true && changeId > 0 && changeId < Global.Lecturers.Count + 1)
                                     {
+                                        Console.WriteLine("Введите фамилию:");
+                                        string lecturersSurnameChanging = Console.ReadLine();
+                                        Console.WriteLine("Введите имя:");
+                                        string lecturersNameChanging = Console.ReadLine();
+                                        Console.WriteLine("Введите отчество:");
+                                        string lecturersPatronymicChanging = Console.ReadLine();
+                                        Console.WriteLine("Введите возраст:");
+                                        bool isLecturersAgeChanging = int.TryParse(Console.ReadLine(), out int changeAge);
+                                        Console.WriteLine("Введите ученое звание:");
+                                        string lecturersAcademicTitleChanging = Console.ReadLine();
                                         Console.WriteLine("Введите первую преподаваемую дисциплину:");
                                         string changeFirstDiscipline = Console.ReadLine();
                                         Console.WriteLine("Введите вторую дисциплину:");
                                         string changeSecondDiscipline = Console.ReadLine();
                                         var subjectsChanging = new List<string> { changeFirstDiscipline, changeSecondDiscipline };
-                                        Console.WriteLine("Введите фамилию:");
-                                        string lecturerSurnameChanging = Console.ReadLine();
-                                        Console.WriteLine("Введите имя:");
-                                        string lecturerNameChanging = Console.ReadLine();
-                                        Console.WriteLine("Введите отчество:");
-                                        string lecturerPatronymicChanging = Console.ReadLine();
-                                        Console.WriteLine("Введите возраст:");
-                                        bool isLecturerAgeChanging = int.TryParse(Console.ReadLine(), out int changeAge);
-                                        Console.WriteLine("Введите ученое звание:");
-                                        string lecturerAcademicTitleChanging = Console.ReadLine();
-                                        Lecturer.UpdateLecturer(changeId - 1, lecturerSurnameChanging, lecturerNameChanging, lecturerPatronymicChanging, changeAge, lecturerAcademicTitleChanging, subjectsChanging);
+                                        Lecturer.UpdateLecturer(changeId - 1, lecturersSurnameChanging, lecturersNameChanging, lecturersPatronymicChanging, changeAge, lecturersAcademicTitleChanging, subjectsChanging);
                                         Console.WriteLine($"Данные о преподавателе с ID = {changeId} изменены");
                                     }
                                     else
@@ -155,10 +204,14 @@ public class Program
                                         lecturer.DisplayInfo();
                                     }
                                     Console.WriteLine("Введите ID преподавателя, которого хотите удалить:");
-                                    bool isLecturerDeleteId = int.TryParse(Console.ReadLine(), out int deleteId);
-                                    if (isLecturerDeleteId == true && deleteId > 0 && deleteId < Global.Lecturers.Count + 1)
+                                    bool isLecturersIdDeleting = int.TryParse(Console.ReadLine(), out int deleteId);
+                                    if (isLecturersIdDeleting == true && deleteId > 0 && deleteId < Global.Lecturers.Count + 1)
                                     {
                                         Global.Lecturers.RemoveAt(deleteId - 1);
+                                        for (int i = 0; i < Global.Lecturers.Count; i++)
+                                        {
+                                            Global.Lecturers[i].Id = i + 1;
+                                        };
                                         Console.WriteLine($"Преподаватель с ID = {deleteId} удален");
                                     }
                                     else
