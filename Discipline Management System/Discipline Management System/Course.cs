@@ -24,12 +24,12 @@ public class Course
 
     public void DisplayInfo()
     {
-        Console.WriteLine($"ID: {Id}");
         Console.WriteLine($"Номер курса: {CourseNumber}");
         Console.WriteLine("Дисциплины:");
         foreach (var subject in Subjects)
         {
-            Console.WriteLine($" * {subject}");
+            Console.WriteLine($" - {subject}");
         }
+        Console.WriteLine(new string('-', 50));
     }
 }
