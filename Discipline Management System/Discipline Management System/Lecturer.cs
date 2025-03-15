@@ -5,7 +5,8 @@ public class Lecturer : Person
     public string AcademicTitle { get; set; }
     public List<string> Subjects { get; set; }
     
-    public Lecturer(int id, string surname, string name, string patronymic, int age) : base(id, surname, name, patronymic, age)
+    public Lecturer(int id, string surname, string name, string patronymic, int age) 
+        : base(id, surname, name, patronymic, age)
     {
         Subjects = new List<string>();
     }

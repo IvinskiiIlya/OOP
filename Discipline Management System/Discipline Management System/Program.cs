@@ -15,7 +15,7 @@ public class Program
         Random random = new Random();
         
         string[] subjects = { "Математика", "Физика", "Экономика", "Философия", "Схемотехника", "Электротехника", "Менеджмент", "Программирование", "Психология", "История", "Сети ЭВМ", "Иностранный язык" };
-        string[] descriptions = { "Царица наук", "Баллистикой по Украине", "Депай в каз", "Зачем это все?", "Шото как то", "Пробой очка", "Повеливаю идти", "Межпозвоночная грыжа с геморроем", "Я дурак?", "Год явки Христа в военкомат?", "Удочка вместо сетей", "Lets summary and suck some dick"};
+        string[] descriptions = { "Царица наук", "Баллистикой по Украине", "Депай в каз", "Зачем это все?", "Шото как то", "Пробой очка", "Повеливаю идти нахуй", "Межпозвоночная грыжа с геморроем", "Я дурак?", "Год явки Христа в военкомат?", "Удочка лучше сети", "Lets summary and suck some dick"};
         string[] surnames = { "Иванов", "Петров", "Сидоров", "Кузнецов", "Семенов", "Артемов", "Федоров", "Максимов", "Александров", "Сергеев", "Антонов", "Павлов"};
         string[] names = { "Максим", "Дмитрий", "Артем", "Алексей", "Иван", "Федор", "Илья", "Петр", "Сергей", "Семен", "Павел", "Антон" };
         string[] patronymics = { "Алексеевич", "Максимович", "Павлович", "Федорович", "Антонович", "Артемович", "Семенович", "Андреевич", "Сергеевич", "Ильич", "Дмитриевич", "Сидорович" };
@@ -30,13 +30,9 @@ public class Program
             int group = random.Next(1, 5); 
             int course = random.Next(1, 4); 
             string title = titles[random.Next(titles.Length)];
-            string secondSubject = subjects[random.Next(subjects.Length)];
-            while (secondSubject == subjects[i])
-            {
-                secondSubject = subjects[random.Next(subjects.Length)];
-            }
-            var subject = new List<string> { subjects[i], secondSubject };
-            Discipline discipline = Discipline.AddDiscipline(id, subjects[i], descriptions[i], surnames[i]);
+            var subject = new List<string> { subjects[i] };
+            var fullName = new List<string> { surnames[i], names[i], patronymics[i] };
+            Discipline discipline = Discipline.AddDiscipline(id, subjects[i], descriptions[i], fullName);
             Global.Disciplines.Add(discipline);
             Lecturer lecturer = Lecturer.AddLecturer(id, surnames[i], names[i], patronymics[i], age, title, subject);
             Global.Lecturers.Add(lecturer);
@@ -247,8 +243,44 @@ public class Program
                             switch (disciplineSelection)
                             {
                                 case 1:
+                                    int addId = Global.Disciplines.Count + 1;
+                                    Console.WriteLine("Введите название дисциплины:");
+                                    string subject = Console.ReadLine();
+                                    Console.WriteLine("Введите описание дисциплины:");
+                                    string description = Console.ReadLine();
+                                    Console.WriteLine("Введите ID преподавателя:");
+                                    bool isLecturersId = int.TryParse(Console.ReadLine(), out int id);
+                                    string surname = Global.Lecturers[id-1].Surname;
+                                    string name = Global.Lecturers[id-1].Name;
+                                    string patronymic = Global.Lecturers[id-1].Patronymic;
+                                    var fullName = new List<string> { surname, name, patronymic };
+                                    Discipline disciplineAdding = Discipline.AddDiscipline(addId, subject, description, fullName);
+                                    Global.Disciplines.Add(disciplineAdding);
+                                    Console.WriteLine("Дисциплина добавлена");
                                     break;
                                 case 2:
+                                    foreach (var discipline in Global.Disciplines)
+                                    {
+                                        discipline.DisplayInfo();
+                                    }
+                                    Console.WriteLine("Введите ID дисциплины, информацию о которой хотите изменить:");
+                                    bool isDisciplinesIdChanging = int.TryParse(Console.ReadLine(), out int changeId);
+                                    if (isDisciplinesIdChanging == true && changeId > 0 && changeId < Global.Disciplines.Count + 1)
+                                    {
+                                        Console.WriteLine("Введите название дисциплины:");
+                                        string disciplinesTitleChanging = Console.ReadLine();
+                                        Console.WriteLine("Введите описание дисциплины:");
+                                        string disciplinesDescriptionChanging = Console.ReadLine();
+                                        var fullNameChanging = new List<string> { Global.Lecturers[changeId-1].Surname, Global.Lecturers[changeId-1].Name, Global.Lecturers[changeId-1].Patronymic };
+                                        Discipline.UpdateDiscipline(changeId - 1, disciplinesTitleChanging, disciplinesDescriptionChanging, fullNameChanging);
+                                        var subjectChanging = new List<string> {disciplinesTitleChanging};
+                                        Lecturer.UpdateLecturer(changeId-1, Global.Lecturers[changeId-1].Surname, Global.Lecturers[changeId-1].Name, Global.Lecturers[changeId-1].Patronymic, Global.Lecturers[changeId-1].Age, Global.Lecturers[changeId-1].AcademicTitle, subjectChanging);
+                                        Console.WriteLine($"Данные о дисциплине с ID = {changeId} изменены");
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Введен несуществующий ID");
+                                    }
                                     break;
                                 case 3:
                                     break;
