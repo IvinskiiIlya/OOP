@@ -12,6 +12,10 @@ public static class DisciplinesManagementSystem
                 string subject = Console.ReadLine();
                 Console.WriteLine("Введите описание дисциплины:");
                 string description = Console.ReadLine();
+                foreach (var lecturer in Global.Lecturers)
+                {
+                    lecturer.DisplayInfo();
+                }
                 Console.WriteLine("Введите ID преподавателя:");
                 bool isLecturersId = int.TryParse(Console.ReadLine(), out int id);
                 string surname = Global.Lecturers[id-1].Surname;
@@ -20,6 +24,7 @@ public static class DisciplinesManagementSystem
                 var fullName = new List<string> { surname, name, patronymic };
                 Discipline disciplineAdding = Discipline.AddDiscipline(addId, subject, description, fullName);
                 Global.Disciplines.Add(disciplineAdding);
+                //Lecturer.UpdateLecturer(id-1, );
                 Console.WriteLine("Дисциплина добавлена");
                 break;
             case 2:
@@ -49,14 +54,14 @@ public static class DisciplinesManagementSystem
             case 3:
                 break;
             case 4:
-                break;
-            case 5:
-                break;
-            case 6:
                 foreach (var discipline in Global.Disciplines)
                 {
                     discipline.DisplayInfo();
                 }
+                break;
+            case 5:
+                break;
+            case 6:
                 break;
         }
     }
