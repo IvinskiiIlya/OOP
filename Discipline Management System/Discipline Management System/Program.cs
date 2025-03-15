@@ -5,6 +5,7 @@ public static class Global
     public static List<Discipline> Disciplines { get; } = new List<Discipline>();
     public static List<Lecturer> Lecturers { get; } = new List<Lecturer>();
     public static List<Student> Students { get; } = new List<Student>();
+    public static List<Course> Courses { get; } = new List<Course>();
 }
 
 public class Program
@@ -13,14 +14,14 @@ public class Program
     {
         Random random = new Random();
         
-        string[] subjects = { "Математика", "Физика", "Экономика", "Философия", "Схемотехника", "Электротехника", "Менеджмент", "Программирование", "Психология", "История" };
-        string[] descriptions = { "Царица наук", "Баллистикой по Украине", "Депай в каз", "Зачем это все?", "Шото как то", "Пробой очка", "Повеливаю идти", "Межпозвоночная грыжа с геморроем", "Я дурак?", "Год явки Христа в военкомат?" };
-        string[] surnames = { "Иванов", "Петров", "Сидоров", "Кузнецов", "Семенов", "Артемов", "Федоров", "Максимов", "Александров", "Сергеев"};
-        string[] names = { "Максим", "Дмитрий", "Артем", "Алексей", "Иван", "Федор", "Илья", "Петр", "Сергей", "Семен" };
-        string[] patronymics = { "Алексеевич", "Максимович", "Сидорович", "Федорович", "Дмитриевич", "Артемович", "Семенович", "Андреевич", "Сергеевич", "Ильич" };
+        string[] subjects = { "Математика", "Физика", "Экономика", "Философия", "Схемотехника", "Электротехника", "Менеджмент", "Программирование", "Психология", "История", "Сети ЭВМ", "Иностранный язык" };
+        string[] descriptions = { "Царица наук", "Баллистикой по Украине", "Депай в каз", "Зачем это все?", "Шото как то", "Пробой очка", "Повеливаю идти", "Межпозвоночная грыжа с геморроем", "Я дурак?", "Год явки Христа в военкомат?", "Удочка вместо сетей", "Lets summary and suck some dick"};
+        string[] surnames = { "Иванов", "Петров", "Сидоров", "Кузнецов", "Семенов", "Артемов", "Федоров", "Максимов", "Александров", "Сергеев", "Антонов", "Павлов"};
+        string[] names = { "Максим", "Дмитрий", "Артем", "Алексей", "Иван", "Федор", "Илья", "Петр", "Сергей", "Семен", "Павел", "Антон" };
+        string[] patronymics = { "Алексеевич", "Максимович", "Павлович", "Федорович", "Антонович", "Артемович", "Семенович", "Андреевич", "Сергеевич", "Ильич", "Дмитриевич", "Сидорович" };
         string[] titles = { "Доцент", "Профессор", "Ассистент", "Старший преподаватель", "Заведующий кафедрой" };
 
-        int numOfObjects = 10; 
+        int numOfObjects = 12; 
         for (int i = 0; i < numOfObjects; i++)
         {
             int id = i + 1;
@@ -43,9 +44,18 @@ public class Program
             Global.Students.Add(student);
         }
         
+        Course firstCourse = Course.AddCourse(1, 1, new List<string>{subjects[0], subjects[1], subjects[2]});
+        Global.Courses.Add(firstCourse);
+        Course secondCourse = Course.AddCourse(2, 2, new List<string>{subjects[3], subjects[4], subjects[5]});
+        Global.Courses.Add(secondCourse);
+        Course thirdCourse = Course.AddCourse(3, 3, new List<string>{subjects[6], subjects[7], subjects[8]});
+        Global.Courses.Add(thirdCourse);
+        Course fourthCourse = Course.AddCourse(4, 4, new List<string>{subjects[9], subjects[10], subjects[11]});
+        Global.Courses.Add(fourthCourse);
+        
         while (true)
         {
-            Console.WriteLine("1 - студенты\n2 - преподаватели\n3 - дисциплины");
+            Console.WriteLine("1 - студенты\n2 - преподаватели\n3 - дисциплины\n4 - курсы");
             bool isNumber = int.TryParse(Console.ReadLine(), out int selection);
             Console.Clear();
             if (isNumber == true)
@@ -250,6 +260,25 @@ public class Program
                                     foreach (var discipline in Global.Disciplines)
                                     {
                                         discipline.DisplayInfo();
+                                    }
+                                    break;
+                            }
+                        }
+                        break;
+                    case 4:
+                        Console.WriteLine("1 - прикрепить\n2 - показать курсы обучения");
+                        bool isCourseNumber = int.TryParse(Console.ReadLine(), out int courseSelection);
+                        Console.Clear();
+                        if (isCourseNumber == true)
+                        {
+                            switch (courseSelection)
+                            {
+                                case 1:
+                                    break;
+                                case 2:
+                                    foreach (var course in Global.Courses)
+                                    {
+                                        course.DisplayInfo();
                                     }
                                     break;
                             }

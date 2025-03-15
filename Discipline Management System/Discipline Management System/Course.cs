@@ -3,29 +3,33 @@ namespace Discipline_Management_System;
 public class Course
 {
     public int Id { get; set; }
-    public string CourseNumber { get; set; }
+    public int CourseNumber { get; set; }
     public List<string> Subjects { get; set; }
 
-    public Course(int id, string courseNumber)
+    public Course(int id, int courseNumber)
     {
         Id = id;
         CourseNumber = courseNumber;
         Subjects = new List<string>();
     }
 
-    public void AddSubject(string subject)
+    public static Course AddCourse(int id, int courseNumber, List<string> subjects)
     {
-        Subjects.Add(subject);
+        var course = new Course(id, courseNumber)
+        {
+            Subjects = subjects
+        };
+        return course;
     }
 
     public void DisplayInfo()
     {
-        Console.WriteLine($"Курс ID: {Id}");
+        Console.WriteLine($"ID: {Id}");
         Console.WriteLine($"Номер курса: {CourseNumber}");
         Console.WriteLine("Дисциплины:");
         foreach (var subject in Subjects)
         {
-            Console.WriteLine($" - {subject}");
+            Console.WriteLine($" * {subject}");
         }
     }
 }

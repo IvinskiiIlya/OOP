@@ -20,21 +20,11 @@ public class Discipline
         return new Discipline(id, title, description, lecturer);
     }
 
-    public void UpdateDiscipline(string title = null, string description = null, string lecturer = null)
+    public static void UpdateDiscipline(int id, string title, string description, string lecturer)
     {
-        if (title != null)
-        {
-            Title = title;
-        }
-        if (description != null)
-        {
-            Description = description;
-        }
-        if (lecturer != null)
-        {
-            Lecturer = lecturer;
-        }
-        Console.WriteLine($"Данные дисциплины {Title} обновлены");
+        Global.Disciplines[id].Title = title;
+        Global.Disciplines[id].Description = description;
+        Global.Disciplines[id].Lecturer = lecturer;
     }
     
     public void DisplayInfo()
@@ -43,6 +33,6 @@ public class Discipline
         Console.WriteLine($"Название: {Title}");
         Console.WriteLine($"Описание: {Description}");
         Console.WriteLine($"Преподаватель: {Lecturer}");
-        Console.WriteLine();
+        Console.WriteLine(new string('-', 50));
     }
 }
