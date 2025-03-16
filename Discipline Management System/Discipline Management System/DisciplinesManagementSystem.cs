@@ -18,13 +18,24 @@ public static class DisciplinesManagementSystem
                 }
                 Console.WriteLine("Введите ID преподавателя:");
                 bool isLecturersId = int.TryParse(Console.ReadLine(), out int id);
-                string surname = Global.Lecturers[id-1].Surname;
-                string name = Global.Lecturers[id-1].Name;
-                string patronymic = Global.Lecturers[id-1].Patronymic;
-                var fullName = new List<string> { surname, name, patronymic };
-                Discipline disciplineAdding = Discipline.AddDiscipline(addId, subject, description, fullName);
+                Console.WriteLine("Введите курс, на котором будет преподаваться дисциплина:");
+                bool isCourse = int.TryParse(Console.ReadLine(), out int course);
+                var subjectsOfCourse = new List<string>();
+                for (int i = 0; i < Global.Courses[course - 1].Subjects.Count; i++)
+                {
+                    subjectsOfCourse.Add(Global.Courses[course - 1].Subjects[i]);
+                }
+                subjectsOfCourse.Add(subject);
+                Course.UpdateCourse(course-1, course, subjectsOfCourse);
+                Discipline disciplineAdding = Discipline.AddDiscipline(addId, subject, description, new List<string>{Global.Lecturers[id-1].Surname});
                 Global.Disciplines.Add(disciplineAdding);
-                //Lecturer.UpdateLecturer(id-1, );
+                var subjects = new List<string>();
+                for (int i = 0; i < Global.Lecturers[id - 1].Subjects.Count; i++)
+                {
+                    subjects.Add(Global.Lecturers[id - 1].Subjects[i]);
+                }
+                subjects.Add(subject);
+                Lecturer.UpdateLecturer(id-1, Global.Lecturers[id-1].Surname, Global.Lecturers[id-1].Name, Global.Lecturers[id-1].Patronymic, Global.Lecturers[id-1].Age, Global.Lecturers[id-1].AcademicTitle, subjects);
                 Console.WriteLine("Дисциплина добавлена");
                 break;
             case 2:

@@ -22,6 +22,12 @@ public class Course
         return course;
     }
 
+    public static void UpdateCourse(int id, int courseNumber, List<string> subjects)
+    {
+        Global.Courses[id].CourseNumber = courseNumber;
+        Global.Courses[id].Subjects = subjects;
+    }
+
     public void DisplayInfo()
     {
         Console.WriteLine($"Номер курса: {CourseNumber}");

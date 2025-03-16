@@ -18,10 +18,23 @@ public static class LecturersManagementSystem
                 bool isLecturersAge = int.TryParse(Console.ReadLine(), out int age);
                 Console.WriteLine("Введите ученое звание:");
                 string lecturersAcademicTitleAdding = Console.ReadLine();
-                Console.WriteLine("Введите преподаваемую дисциплину:");
-                string disciplineAdding = Console.ReadLine();
-                var subjectsAdding = new List<string> { disciplineAdding };
-                Lecturer lecturersAdding = Lecturer.AddLecturer(addId, lecturersSurnameAdding, lecturersNameAdding, lecturersPatronymicAdding, age, lecturersAcademicTitleAdding, subjectsAdding);
+                foreach (var discipline in Global.Disciplines)
+                {
+                    discipline.DisplayInfo();
+                }
+                Console.WriteLine("Введите ID дисциплины:");
+                bool isDisciplineId = int.TryParse(Console.ReadLine(), out int disciplineId);
+                if (isDisciplineId && disciplineId > 0 && disciplineId < Global.Disciplines.Count + 1)
+                {
+                    var lecturersOfDiscipline = new List<string>();
+                    for (int j = 0; j < Global.Disciplines[disciplineId-1].Lecturer.Count; j++)
+                    {
+                        lecturersOfDiscipline.Add(Global.Disciplines[disciplineId-1].Lecturer[j]);
+                    }
+                    lecturersOfDiscipline.Add(lecturersSurnameAdding);
+                    Discipline.UpdateDiscipline(disciplineId-1, Global.Disciplines[disciplineId-1].Title, Global.Disciplines[disciplineId-1].Description, lecturersOfDiscipline);
+                }
+                Lecturer lecturersAdding = Lecturer.AddLecturer(addId, lecturersSurnameAdding, lecturersNameAdding, lecturersPatronymicAdding, age, lecturersAcademicTitleAdding, new List<string>{Global.Disciplines[disciplineId-1].Title});
                 Global.Lecturers.Add(lecturersAdding);
                 Console.WriteLine("Преподаватель добавлен");
                 break;
@@ -44,18 +57,17 @@ public static class LecturersManagementSystem
                     bool isLecturersAgeChanging = int.TryParse(Console.ReadLine(), out int changeAge);
                     Console.WriteLine("Введите ученое звание:");
                     string lecturersAcademicTitleChanging = Console.ReadLine();
-                    Console.WriteLine("Введите преподаваемую дисциплину:");
-                    string disciplineChanging = Console.ReadLine();
-                    for (int i = 0; i < Global.Disciplines.Count; i++)
+                    var subjects = new List<string>();
+                    for (int i = 0; i < Global.Lecturers[changeId-1].Subjects.Count; i++)
                     {
-                        if (disciplineChanging == Global.Disciplines[i].Title)
-                        {
-                            var fullName = new List<string> { lecturersSurnameChanging, lecturersNameChanging, lecturersPatronymicChanging };
-                            Discipline.UpdateDiscipline(i, Global.Disciplines[i].Title, Global.Disciplines[i].Description, fullName);
-                        }
+                        subjects.Add(Global.Lecturers[changeId-1].Subjects[i]);
                     }
-                    var subjectsChanging = new List<string> { disciplineChanging };
-                    Lecturer.UpdateLecturer(changeId - 1, lecturersSurnameChanging, lecturersNameChanging, lecturersPatronymicChanging, changeAge, lecturersAcademicTitleChanging, subjectsChanging);
+                    Lecturer.UpdateLecturer(changeId - 1, lecturersSurnameChanging, lecturersNameChanging, lecturersPatronymicChanging, changeAge, lecturersAcademicTitleChanging, subjects);
+                    var lecturers = new List<string>();
+                    for (int i = 0; i < Global.Disciplines[changeId-1].Lecturer.Count; i++)
+                    {
+                        subjects.Add(Global.Lecturers[changeId-1].Subjects[i]);
+                    }
                     Console.WriteLine($"Данные о преподавателе с ID = {changeId} изменены");
                 }
                 else

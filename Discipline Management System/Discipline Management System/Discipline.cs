@@ -36,7 +36,7 @@ public class Discipline
         Console.WriteLine($"ID: {Id}");
         Console.WriteLine($"Название: {Title}");
         Console.WriteLine($"Описание: {Description}");
-        Console.WriteLine($"Преподаватель: {string.Join(" ", Lecturer)}");
+        Console.WriteLine($"Преподаватель: {string.Join(", ", Lecturer)}");
         Console.WriteLine(new string('-', 50));
     }
 }
