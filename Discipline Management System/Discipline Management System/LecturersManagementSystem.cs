@@ -72,6 +72,25 @@ public static class LecturersManagementSystem
                         ids.Add(Global.Lecturers[changeId-1].SubjectsId[i]);
                     
                     Lecturer.UpdateLecturer(changeId - 1, lecturersSurnameChanging, lecturersNameChanging, lecturersPatronymicChanging, changeAge, lecturersAcademicTitleChanging, subjects, ids);
+                    
+                    var lecturers = new List<string>();
+                    var lecturersId = new List<int>();
+                    for (int i = 0; i < Global.Disciplines[changeId - 1].Lecturer.Count; i++)
+                    {
+                        if (Global.Lecturers[changeId - 1].Id == Global.Disciplines[changeId - 1].LecturerId[i])
+                        {
+                            lecturers.Add(lecturersSurnameChanging);
+                            lecturersId.Add(Global.Disciplines[changeId-1].LecturerId[i]);
+                        }
+                        else
+                        {
+                            lecturers.Add(Global.Disciplines[changeId-1].Lecturer[i]);
+                            lecturersId.Add(Global.Disciplines[changeId-1].LecturerId[i]);
+                        }
+                    }
+                  
+                    for (int i = 0; i < Global.Lecturers[changeId-1].SubjectsId.Count; i++)
+                        Discipline.UpdateDiscipline(ids[i]-1, Global.Disciplines[ids[i]-1].Title, Global.Disciplines[ids[i]-1].Description, lecturers, lecturersId);
                     Console.WriteLine($"Данные о преподавателе с ID = {changeId} изменены");
                 }
                 else

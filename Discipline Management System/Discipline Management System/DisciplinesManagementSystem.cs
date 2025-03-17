@@ -28,8 +28,15 @@ public static class DisciplinesManagementSystem
 
                 var lecturersId = new List<int>();
                 for (int i = 0; i < Global.Disciplines[id - 1].LecturerId.Count; i++)
-                    lecturersId.Add(Global.Disciplines[id - 1].LecturerId[i]);
-                lecturersId.Add(id);
+                {
+                    if (id == Global.Disciplines[id-1].LecturerId[i]) 
+                        lecturersId.Add(Global.Disciplines[id - 1].LecturerId[i]);
+                    else
+                    {
+                        lecturersId.Add(Global.Disciplines[id - 1].LecturerId[i]);
+                        lecturersId.Add(id);
+                    }
+                }
                 Discipline disciplineAdding = Discipline.AddDiscipline(addId, subject, description, new List<string>{Global.Lecturers[id-1].Surname},lecturersId);
                 Global.Disciplines.Add(disciplineAdding);
                 
