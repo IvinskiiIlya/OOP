@@ -38,6 +38,7 @@ public class Student : Person
         Console.WriteLine($"ID: {Id}");
         Console.WriteLine($"ФИО: {Surname} {Name} {Patronymic}, возраст: {Age}");
         Console.WriteLine($"Курс обучения: {Course}");
+        Console.WriteLine($"Изучаемые дисциплины: {string.Join(", ", Global.Courses[Course-1].Subjects)}");
         Console.WriteLine($"Группа студента: {GroupNumber}");
         Console.WriteLine(new string('-', 50));
     }

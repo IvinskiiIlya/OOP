@@ -1,4 +1,6 @@
-﻿namespace Discipline_Management_System;
+﻿using System.Net;
+
+namespace Discipline_Management_System;
 
 public static class Global
 {
@@ -46,7 +48,7 @@ public class Program
         
         while (true)
         {
-            Console.WriteLine("1 - дисциплины\n2 - курсы\n3 - преподаватели\n4 - студенты");
+            Console.WriteLine("1 - дисциплины\n2 - курсы\n3 - преподаватели\n4 - студенты\n5 - поиск");
             bool isNumber = int.TryParse(Console.ReadLine(), out int selection);
             Console.Clear();
             if (isNumber)
@@ -84,6 +86,34 @@ public class Program
                         if (isStudentNumber)
                         {
                             StudentsManagementSystem.Main(studentSelection);
+                        }
+                        break;
+                    case 5:
+                        Console.WriteLine("1 - дисциплины\n2 - преподаватели\n3 - студенты");
+                        bool isSearch = int.TryParse(Console.ReadLine(), out int search);
+                        switch (search)
+                        {
+                            case 1:
+                                Console.WriteLine("Введите ID дисциплины:");
+                                bool isSearchDiscipline = int.TryParse(Console.ReadLine(), out int searchDiscipline);
+                                Console.WriteLine(new string('-', 50));
+                                Console.WriteLine($"Данные дисцпиплины с указанным ID:");
+                                Global.Disciplines[searchDiscipline].DisplayInfo();
+                                break;
+                            case 2:
+                                Console.WriteLine("Введите ID преподавателя:");
+                                bool isSearchLecturer = int.TryParse(Console.ReadLine(), out int searchLecturer);
+                                Console.WriteLine(new string('-', 50));
+                                Console.WriteLine($"Данные преподавателя с указанным ID:");
+                                Global.Lecturers[searchLecturer].DisplayInfo();
+                                break;
+                            case 3:
+                                Console.WriteLine("Введите ID студента:");
+                                bool isSearchStudent = int.TryParse(Console.ReadLine(), out int searchStudent);
+                                Console.WriteLine(new string('-', 50));
+                                Console.WriteLine($"Данные студента с указанным ID:");
+                                Global.Students[searchStudent].DisplayInfo();
+                                break;
                         }
                         break;
                 }
