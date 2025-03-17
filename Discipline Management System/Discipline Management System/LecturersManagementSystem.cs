@@ -110,12 +110,18 @@ public static class LecturersManagementSystem
                         Global.Lecturers[i].Id = i + 1;
                     
                     var lecturerDeleting = new List<string>();
-                    /*for (int i = 0; i < Global.Lecturers[deleteId-1].Subjects.Count; i++)
-                        subjects.Add(Global.Lecturers[changeId-1].Subjects[i]);
-                    var lecturersIdDeleting 
+                    var lecturerIdDeleting = new List<int>();
+                    for (int i = 0; i < Global.Disciplines[deleteId - 1].LecturerId.Count; i++)
+                    {
+                        if (deleteId != Global.Disciplines[deleteId - 1].LecturerId[i])
+                        {
+                            lecturerDeleting.Add(Global.Disciplines[deleteId-1].Lecturer[i]);
+                            lecturerIdDeleting.Add(Global.Disciplines[deleteId-1].LecturerId[i]);
+                        }
+                    }
                         
-                    Discipline.UpdateDiscipline(deleteId-1, Global.Disciplines[deleteId-1].Title, Global.Disciplines[deleteId-1].Description, lecturerDeleting);
-                    */Console.WriteLine($"Преподаватель с ID = {deleteId} удален");
+                    Discipline.UpdateDiscipline(deleteId-1, Global.Disciplines[deleteId-1].Title, Global.Disciplines[deleteId-1].Description, lecturerDeleting, lecturerIdDeleting);
+                    Console.WriteLine($"Преподаватель с ID = {deleteId} удален");
                 }
                 else
                     Console.WriteLine("Введен несуществующий ID");

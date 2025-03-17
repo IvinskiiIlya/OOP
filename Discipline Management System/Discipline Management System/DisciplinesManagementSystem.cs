@@ -70,39 +70,132 @@ public static class DisciplinesManagementSystem
                     var lecturerUpdating = new List<string>();
                     for (int i = 0; i < Global.Disciplines[changeId-1].Lecturer.Count; i++)
                         lecturerUpdating.Add(Global.Disciplines[changeId-1].Lecturer[i]);
-                    lecturerUpdating.Add(Global.Lecturers[changeId-1].Surname);
                     
                     var lecturersIdUpdating = new List<int>();
                     for (int i = 0; i < Global.Disciplines[changeId - 1].LecturerId.Count; i++)
                         lecturersIdUpdating.Add(Global.Disciplines[changeId - 1].LecturerId[i]);
-                    lecturersIdUpdating.Add(changeId);
                     
                     Discipline.UpdateDiscipline(changeId - 1, disciplinesTitleChanging, disciplinesDescriptionChanging, lecturerUpdating, lecturersIdUpdating);
                     
-                    var subjectChanging = new List<string>();
-                    for (int i = 0; i < Global.Lecturers[changeId-1].Subjects.Count; i++)
-                        subjectChanging.Add(Global.Lecturers[changeId-1].Subjects[i]);
-                    subjectChanging.Add(disciplinesTitleChanging);
+                    var disciplines = new List<string>();
+                    var disciplinesId = new List<int>();
+                    for (int i = 0; i < Global.Lecturers[changeId - 1].Subjects.Count; i++)
+                    {
+                        if (Global.Disciplines[changeId - 1].Id == Global.Lecturers[changeId - 1].SubjectsId[i])
+                        {
+                            disciplines.Add(disciplinesTitleChanging);
+                            disciplinesId.Add(Global.Lecturers[changeId-1].SubjectsId[i]);
+                        }
+                        else
+                        {
+                            disciplines.Add(Global.Lecturers[changeId-1].Subjects[i]);
+                            disciplinesId.Add(Global.Lecturers[changeId-1].SubjectsId[i]);
+                        }
+                    }
                     
-                    var idsUpdating = new List<int>();
-                    for (int i = 0; i < Global.Lecturers[changeId-1].SubjectsId.Count; i++)
-                        idsUpdating.Add(Global.Lecturers[changeId-1].SubjectsId[i]);
-                    idsUpdating.Add(changeId);
-                    Lecturer.UpdateLecturer(changeId-1, Global.Lecturers[changeId-1].Surname, Global.Lecturers[changeId-1].Name, Global.Lecturers[changeId-1].Patronymic, Global.Lecturers[changeId-1].Age, Global.Lecturers[changeId-1].AcademicTitle, subjectChanging, idsUpdating);
+                    for (int i = 0; i < Global.Disciplines[changeId-1].LecturerId.Count; i++) 
+                        Lecturer.UpdateLecturer(lecturersIdUpdating[i]-1, Global.Lecturers[lecturersIdUpdating[i]-1].Surname, Global.Lecturers[lecturersIdUpdating[i]-1].Name, Global.Lecturers[lecturersIdUpdating[i]-1].Patronymic, Global.Lecturers[lecturersIdUpdating[i]-1].Age, Global.Lecturers[lecturersIdUpdating[i]-1].AcademicTitle, disciplines, disciplinesId);
                     Console.WriteLine($"Данные о дисциплине с ID = {changeId} изменены");
                 }
                 else
                     Console.WriteLine("Введен несуществующий ID");
                 break;
             case 3:
+                
+                foreach (var discipline in Global.Disciplines)
+                    discipline.DisplayInfo();
+                Console.WriteLine("Введите ID дисциплины, котороую хотите удалить:");
+                bool isDisciplinesIdDeleting = int.TryParse(Console.ReadLine(), out int deleteId);
+                
+                if (isDisciplinesIdDeleting && deleteId > 0 && deleteId < Global.Disciplines.Count + 1)
+                {
+                    Global.Disciplines.RemoveAt(deleteId - 1);
+                    for (int i = 0; i < Global.Disciplines.Count; i++)
+                        Global.Disciplines[i].Id = i + 1;
+                    
+                    var disciplineDeleting = new List<string>();
+                    var disciplineIdDeleting = new List<int>();
+                    for (int i = 0; i < Global.Lecturers[deleteId - 1].SubjectsId.Count; i++)
+                    {
+                        if (deleteId != Global.Lecturers[deleteId - 1].SubjectsId[i])
+                        {
+                            disciplineDeleting.Add(Global.Lecturers[deleteId-1].Subjects[i]);
+                            disciplineIdDeleting.Add(Global.Lecturers[deleteId-1].SubjectsId[i]);
+                        }
+                    }
+                        
+                    Discipline.UpdateDiscipline(deleteId-1, Global.Disciplines[deleteId-1].Title, Global.Disciplines[deleteId-1].Description, disciplineDeleting, disciplineIdDeleting);
+                    Console.WriteLine($"Преподаватель с ID = {deleteId} удален");
+                }
+                else
+                    Console.WriteLine("Введен несуществующий ID");
                 break;
             case 4:
                 foreach (var discipline in Global.Disciplines)
                     discipline.DisplayInfo();
                 break;
             case 5:
+                
+                foreach (var discipline in Global.Disciplines)
+                    discipline.DisplayInfo();
+                Console.WriteLine("Введите ID дисциплины, которую нужно прикрепить:");
+                bool isDisciplineId = int.TryParse(Console.ReadLine(), out int disciplineId);
+                
+                if (isDisciplineId && disciplineId > 0 && disciplineId < Global.Disciplines.Count + 1)
+                {
+                    foreach (var lecturer in Global.Lecturers)
+                        lecturer.DisplayInfo();
+                    Console.WriteLine("Введите ID преподавателя, к которому нужно прикрепить дисциплину:");
+                    bool isLecturerId = int.TryParse(Console.ReadLine(), out int lecturerId);
+
+                    if (isLecturerId && lecturerId > 0 && lecturerId < Global.Lecturers.Count + 1)
+                    {
+                        var disciplineAttaching = new List<string>();
+                        var disciplineIdAttaching = new List<int>();
+                        for (int i = 0; i < Global.Disciplines[disciplineId - 1].LecturerId.Count; i++)
+                        {
+                            disciplineAttaching.Add(Global.Disciplines[disciplineId-1].Lecturer[i]);
+                            disciplineIdAttaching.Add(Global.Disciplines[disciplineId-1].LecturerId[i]);
+                        }
+                        //disciplineAttaching.Add(Global.Disciplines[disciplineId-1].Lecturer);
+                        disciplineIdAttaching.Add(Global.Disciplines[disciplineId-1].Id);
+                        
+                        Discipline.UpdateDiscipline(disciplineId-1, Global.Disciplines[disciplineId-1].Title, Global.Disciplines[disciplineId-1].Description, disciplineAttaching, disciplineIdAttaching);
+                        Console.WriteLine($"Дисциплина с ID = {disciplineId} прикреплена к преподавателю с ID = {lecturerId}");
+                    }
+                    else
+                        Console.WriteLine("Введен несуществующий ID");
+                }
+                else
+                    Console.WriteLine("Введен несуществующий ID");
                 break;
             case 6:
+                
+                foreach (var discipline in Global.Disciplines)
+                    discipline.DisplayInfo();
+                Console.WriteLine("Введите ID дисциплины, которую нужно прикрепить:");
+                bool isDisciplineToCourseId = int.TryParse(Console.ReadLine(), out int disciplineToCourseId);
+                
+                if (isDisciplineToCourseId && disciplineToCourseId > 0 && disciplineToCourseId < Global.Disciplines.Count + 1)
+                {
+                    Console.WriteLine("Введите номер курса, к которому нужно прикрепить:");
+                    bool isCourseNum = int.TryParse(Console.ReadLine(), out int courseNum);
+
+                    if (isCourseNum && courseNum >= 1 && courseNum <= 4)
+                    {
+                        var subjectsOfCourseAttaching = new List<string>();
+                        for (int i = 0; i < Global.Courses[courseNum - 1].Subjects.Count; i++) 
+                            subjectsOfCourseAttaching.Add(Global.Courses[courseNum - 1].Subjects[i]);
+                        subjectsOfCourseAttaching.Add(Global.Disciplines[disciplineToCourseId-1].Title);
+                        
+                        Course.UpdateCourse(courseNum - 1, courseNum, subjectsOfCourseAttaching);
+                        Console.WriteLine($"Дисциплина с ID = {disciplineToCourseId} прикреплена к {courseNum} курсу");
+                    }
+                    else
+                        Console.WriteLine("Введен несуществующий номер курса");
+                }
+                else
+                    Console.WriteLine("Введен несуществующий ID");
                 break;
         }
     }
