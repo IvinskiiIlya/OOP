@@ -157,10 +157,22 @@ public static class DisciplinesManagementSystem
                             disciplineAttaching.Add(Global.Disciplines[disciplineId-1].Lecturer[i]);
                             disciplineIdAttaching.Add(Global.Disciplines[disciplineId-1].LecturerId[i]);
                         }
-                        //disciplineAttaching.Add(Global.Disciplines[disciplineId-1].Lecturer);
-                        disciplineIdAttaching.Add(Global.Disciplines[disciplineId-1].Id);
-                        
+                        disciplineAttaching.Add(Global.Lecturers[lecturerId-1].Surname);
+                        disciplineIdAttaching.Add(Global.Lecturers[lecturerId-1].Id);
+
                         Discipline.UpdateDiscipline(disciplineId-1, Global.Disciplines[disciplineId-1].Title, Global.Disciplines[disciplineId-1].Description, disciplineAttaching, disciplineIdAttaching);
+
+                        var lecturerAttachUpdate = new List<string>(); 
+                        var lecturerAttachUpdateId = new List<int>();
+                        for (int i = 0; i < Global.Lecturers[lecturerId - 1].SubjectsId.Count; i++)
+                        {
+                            lecturerAttachUpdate.Add(Global.Lecturers[lecturerId-1].Subjects[i]);
+                            lecturerAttachUpdateId.Add(Global.Lecturers[lecturerId-1].SubjectsId[i]);
+                        }
+                        lecturerAttachUpdate.Add(Global.Disciplines[disciplineId-1].Title);
+                        lecturerAttachUpdateId.Add(disciplineId);
+                        
+                        Lecturer.UpdateLecturer(lecturerId-1, Global.Lecturers[lecturerId-1].Surname, Global.Lecturers[lecturerId-1].Name, Global.Lecturers[lecturerId-1].Patronymic, Global.Lecturers[lecturerId-1].Age, Global.Lecturers[lecturerId-1].AcademicTitle, lecturerAttachUpdate, lecturerAttachUpdateId);
                         Console.WriteLine($"Дисциплина с ID = {disciplineId} прикреплена к преподавателю с ID = {lecturerId}");
                     }
                     else
