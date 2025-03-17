@@ -1,0 +1,14 @@
+D:\HEI\6 семестр\ООП\ЛР 2\Geometric Shape Manager\Geometric Shape Manager\bin\Debug\net8.0\Geometric Shape Manager.exe
+D:\HEI\6 семестр\ООП\ЛР 2\Geometric Shape Manager\Geometric Shape Manager\bin\Debug\net8.0\Geometric Shape Manager.deps.json
+D:\HEI\6 семестр\ООП\ЛР 2\Geometric Shape Manager\Geometric Shape Manager\bin\Debug\net8.0\Geometric Shape Manager.runtimeconfig.json
+D:\HEI\6 семестр\ООП\ЛР 2\Geometric Shape Manager\Geometric Shape Manager\bin\Debug\net8.0\Geometric Shape Manager.dll
+D:\HEI\6 семестр\ООП\ЛР 2\Geometric Shape Manager\Geometric Shape Manager\bin\Debug\net8.0\Geometric Shape Manager.pdb
+D:\HEI\6 семестр\ООП\ЛР 2\Geometric Shape Manager\Geometric Shape Manager\obj\Debug\net8.0\Geometric Shape Manager.GeneratedMSBuildEditorConfig.editorconfig
+D:\HEI\6 семестр\ООП\ЛР 2\Geometric Shape Manager\Geometric Shape Manager\obj\Debug\net8.0\Geometric Shape Manager.AssemblyInfoInputs.cache
+D:\HEI\6 семестр\ООП\ЛР 2\Geometric Shape Manager\Geometric Shape Manager\obj\Debug\net8.0\Geometric Shape Manager.AssemblyInfo.cs
+D:\HEI\6 семестр\ООП\ЛР 2\Geometric Shape Manager\Geometric Shape Manager\obj\Debug\net8.0\Geometric Shape Manager.csproj.CoreCompileInputs.cache
+D:\HEI\6 семестр\ООП\ЛР 2\Geometric Shape Manager\Geometric Shape Manager\obj\Debug\net8.0\Geometric Shape Manager.dll
+D:\HEI\6 семестр\ООП\ЛР 2\Geometric Shape Manager\Geometric Shape Manager\obj\Debug\net8.0\refint\Geometric Shape Manager.dll
+D:\HEI\6 семестр\ООП\ЛР 2\Geometric Shape Manager\Geometric Shape Manager\obj\Debug\net8.0\Geometric Shape Manager.pdb
+D:\HEI\6 семестр\ООП\ЛР 2\Geometric Shape Manager\Geometric Shape Manager\obj\Debug\net8.0\Geometric Shape Manager.genruntimeconfig.cache
+D:\HEI\6 семестр\ООП\ЛР 2\Geometric Shape Manager\Geometric Shape Manager\obj\Debug\net8.0\ref\Geometric Shape Manager.dll
