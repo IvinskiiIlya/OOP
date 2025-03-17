@@ -105,9 +105,9 @@ public static class LecturersManagementSystem
                 
                 if (isLecturersIdDeleting && deleteId > 0 && deleteId < Global.Lecturers.Count + 1)
                 {
-                    Global.Lecturers.RemoveAt(deleteId - 1);
-                    for (int i = 0; i < Global.Lecturers.Count; i++)
-                        Global.Lecturers[i].Id = i + 1;
+                    var lecturersDisciplineId = new List<int>();
+                    for (int i = 0; i < Global.Lecturers[deleteId - 1].SubjectsId.Count; i++)
+                        lecturersDisciplineId.Add(Global.Lecturers[deleteId - 1].SubjectsId[i]);
                     
                     var lecturerDeleting = new List<string>();
                     var lecturerIdDeleting = new List<int>();
@@ -120,7 +120,12 @@ public static class LecturersManagementSystem
                         }
                     }
                         
-                    Discipline.UpdateDiscipline(deleteId-1, Global.Disciplines[deleteId-1].Title, Global.Disciplines[deleteId-1].Description, lecturerDeleting, lecturerIdDeleting);
+                    for (int i = 0; i < Global.Lecturers[deleteId - 1].SubjectsId.Count; i++) 
+                        Discipline.UpdateDiscipline(lecturersDisciplineId[i]-1, Global.Disciplines[lecturersDisciplineId[i]-1].Title, Global.Disciplines[lecturersDisciplineId[i]-1].Description, lecturerDeleting, lecturerIdDeleting);
+                    
+                    Global.Lecturers.RemoveAt(deleteId - 1);
+                    for (int i = 0; i < Global.Lecturers.Count; i++)
+                        Global.Lecturers[i].Id = i + 1;
                     Console.WriteLine($"Преподаватель с ID = {deleteId} удален");
                 }
                 else

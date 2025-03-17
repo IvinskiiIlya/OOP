@@ -109,9 +109,9 @@ public static class DisciplinesManagementSystem
                 
                 if (isDisciplinesIdDeleting && deleteId > 0 && deleteId < Global.Disciplines.Count + 1)
                 {
-                    Global.Disciplines.RemoveAt(deleteId - 1);
-                    for (int i = 0; i < Global.Disciplines.Count; i++)
-                        Global.Disciplines[i].Id = i + 1;
+                    var disciplinesLecturerId = new List<int>();
+                    for (int i = 0; i < Global.Disciplines[deleteId - 1].LecturerId.Count; i++)
+                        disciplinesLecturerId.Add(Global.Disciplines[deleteId - 1].LecturerId[i]);
                     
                     var disciplineDeleting = new List<string>();
                     var disciplineIdDeleting = new List<int>();
@@ -124,7 +124,12 @@ public static class DisciplinesManagementSystem
                         }
                     }
                         
-                    Discipline.UpdateDiscipline(deleteId-1, Global.Disciplines[deleteId-1].Title, Global.Disciplines[deleteId-1].Description, disciplineDeleting, disciplineIdDeleting);
+                    for (int i = 0; i < Global.Disciplines[deleteId - 1].LecturerId.Count; i++) 
+                        Lecturer.UpdateLecturer(disciplinesLecturerId[i]-1, Global.Lecturers[disciplinesLecturerId[i]-1].Surname, Global.Lecturers[disciplinesLecturerId[i]-1].Name, Global.Lecturers[disciplinesLecturerId[i]-1].Patronymic, Global.Lecturers[disciplinesLecturerId[i]-1].Age, Global.Lecturers[disciplinesLecturerId[i]-1].AcademicTitle, disciplineDeleting, disciplineIdDeleting);
+                    
+                    Global.Disciplines.RemoveAt(deleteId - 1);
+                    for (int i = 0; i < Global.Disciplines.Count; i++)
+                        Global.Disciplines[i].Id = i + 1;
                     Console.WriteLine($"Преподаватель с ID = {deleteId} удален");
                 }
                 else
